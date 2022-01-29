@@ -1,8 +1,8 @@
 #@# vim: set filetype=dockerfile:
-FROM alpine:3.10
-MAINTAINER Takahiro INOUE <takahiro.inoue@aist.go.jp>
+FROM alpine:3.15
+LABEL Author="Takahiro INOUE <takahiro.inoue@aist.go.jp>"
 
-ENV NGINX_VERSION 1.17.5
+ENV NGINX_VERSION 1.21.1
 
 ####
 ## dependent packages for docker build
@@ -21,7 +21,7 @@ RUN curl -LSs http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz -O        
     tar xf nginx-${NGINX_VERSION}.tar.gz                                                                             && \
     cd     nginx-${NGINX_VERSION}                                                                                    && \
     git clone https://github.com/chobits/ngx_http_proxy_connect_module                                               && \
-    patch -p1 < ./ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_101504.patch                             && \
+    patch -p1 < ./ngx_http_proxy_connect_module/patch/proxy_connect_rewrite_102101.patch                             && \
     ./configure                                                                                                         \
       --add-module=./ngx_http_proxy_connect_module                                                                      \
       --sbin-path=/usr/sbin/nginx                                                                                       \
